@@ -1,0 +1,17 @@
+{
+  "Proto-Indo-European": {
+    "url": "https://glottolog.org/resource/languoid/id/indo1319",
+    "latitude": 48,
+    "longitude": 39
+  },
+  "Proto-Germanic": {
+    "url": "https://glottolog.org/resource/languoid/id/germ1287",
+    "latitude": 54,
+    "longitude": 10
+  },
+  "Proto-West Germanic": {
+    "url": "https://glottolog.org/resource/languoid/id/indo1319",
+    "latitude": 54,
+    "longitude": 10
+  }
+}
