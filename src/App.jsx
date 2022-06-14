@@ -6,11 +6,10 @@ import Map, {
   Marker,
 } from "react-map-gl";
 import axios from "axios";
-import "mapbox-gl/dist/mapbox-gl.css";
 import { toGreeklish } from "greek-utils";
 import langData2 from "./langData2.json";
 
-const token = import.meta.env.VITE_MAPBOX_TOKEN;
+import "mapbox-gl/dist/mapbox-gl.css";
 
 function App() {
   const [wordId, setWordId] = useState(0);
@@ -71,13 +70,20 @@ function App() {
       let langsLoc = {};
 
       const getLangs = async (lang) => {
-        const response = await axios.get(
-          `https://glottolog.org/glottolog?search=${lang.replace("Proto-", "")}`
-        );
+        const response = await axios
+          .get(
+            `https://glottolog.org/glottolog?search=${lang.replace(
+              "Proto-",
+              ""
+            )}`
+          )
+          .catch((error) => console.log(error));
         return [lang, response.request.responseURL];
       };
       const getGlotto = async (lang, url) => {
-        const response = await axios.get(url + ".json");
+        const response = await axios
+          .get(url + ".json")
+          .catch((error) => console.log(error));
         return [lang, url, response.data];
       };
 
@@ -133,19 +139,27 @@ function App() {
   return (
     <Map
       initialViewState={{
-        longitude: 29,
-        latitude: 49,
-        zoom: 3.7,
+        longitude: 18.5,
+        latitude: 48.5,
+        zoom: 4,
+        ////
+        // longitude: 17,
+        // latitude: 49,
+        // zoom: 4.2,
+        // bearing: 13,
+        // pitch: 60,
       }}
-      mapStyle="mapbox://styles/mapbox/dark-v10"
-      // mapStyle="mapbox://styles/agmmnn/cl4094mje000l14n0utbraa7s"
-      mapboxAccessToken={token}
+      // mapStyle="mapbox://styles/mapbox/dark-v10"
+      mapStyle="mapbox://styles/agmmnn/cl4094mje000l14n0utbraa7s"
+      mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
       attributionControl={false}
       // onDrag={(e) =>
       //   console.log(
       //     e.viewState.longitude,
       //     e.viewState.latitude,
-      //     e.viewState.zoom
+      //     e.viewState.zoom,
+      //     e.viewState.bearing,
+      //     e.viewState.pitch
       //   )
       // }
     >
@@ -166,16 +180,18 @@ function App() {
           style={{
             padding: "1rem",
             paddingInlineStart: "2rem",
-            fontSize: "2rem",
+            fontSize: "1rem",
             border: "1px solid #ccc",
           }}
           onChange={(e) => setSearchValue(e.target.value)}
           onKeyDown={(e) => (e.key === "Enter" ? getSearch() : null)}
         />
-        <button type="submit" onClick={getSearch}>
+        <button type="submit" onClick={searchValue ? getSearch : null}>
           Search
         </button>
-        <button type="submit">Random</button>
+        <button type="submit" onClick={getrandom}>
+          Random
+        </button>
       </div>
 
       {nodes.map((item) => {
@@ -183,12 +199,16 @@ function App() {
           <Marker
             key={item.id}
             longitude={
-              item.longitude
-                ? item.longitude
-                : langData2[item.language].longitude
+              item.longitude ||
+              (langData2.hasOwnProperty(item.language)
+                ? langData2[item.language].longitude
+                : 19)
             }
             latitude={
-              item.latitude ? item.latitude : langData2[item.language].latitude
+              item.latitude ||
+              (langData2.hasOwnProperty(item.language)
+                ? langData2[item.language].latitude
+                : 50)
             }
             anchor="bottom"
             cluster={true}
@@ -196,26 +216,53 @@ function App() {
             <div
               className="card"
               style={{
-                backgroundColor: "white",
-                padding: "0px 10px",
-                borderRadius: 10,
+                backgroundColor: "#fefffb",
+                padding: "6px 6px",
                 width: 130,
-                border: "1px solid #a4a79e",
-                fontSize: 15,
-                fontFamily: "Cormorant Infant, serif",
+                borderRadius: 4,
+                boxShadow: "0 1px 2px rgba(0, 0, 0, 0.24)",
                 textAlign: "center",
+                lineHeight: "0.8rem",
               }}
             >
-              <h4>{item.language}</h4>
-              <h3>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  paddingTop: "2px",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: 12,
+                    fontFamily: "Cormorant Infant, serif",
+                    padding: "4px 10px",
+                    backgroundColor: "#5794c6",
+                    color: "white",
+                    borderRadius: "10px ",
+                  }}
+                >
+                  {item.language}
+                </div>
+              </div>
+              <div
+                style={{
+                  fontSize: 16,
+                  fontFamily: "Cormorant Infant, serif",
+                  padding: "9px 0px",
+                  fontWeight: "bold",
+                }}
+              >
                 {item.word}
                 {item.language === "Ancient Greek"
                   ? " (" + toGreeklish(item.word) + ")"
                   : null}
-              </h3>
-              <p style={{ fontFamily: "Roboto", fontSize: 13 }}>
+              </div>
+              <div
+                style={{ fontFamily: "Montserrat, sans-serif", fontSize: 11 }}
+              >
                 {item.definitions}
-              </p>
+              </div>
             </div>
           </Marker>
         );
