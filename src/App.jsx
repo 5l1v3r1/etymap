@@ -16,6 +16,7 @@ function App() {
   const [data, setData] = useState([]);
   const [langData, setLangData] = useState([]);
   const [nodes, setNodes] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
 
   const getData = () => {
     axios
@@ -36,11 +37,10 @@ function App() {
       .catch((error) => console.log(error));
   };
 
-  const [searchValue, setSearchValue] = useState("");
   const getSearch = () => {
     axios
       .get(
-        `https://api.etymologyexplorer.com/prod/autocomplete?word=${searchValue}&language=English`
+        `https://api.etymologyexplorer.com/prod/autocomplete?word=${searchValue.trim()}&language=English`
       )
       .then((r) => {
         setWordId(r.data.auto_complete_data[0]["_id"]);
@@ -109,6 +109,7 @@ function App() {
                 };
               });
               setLangData(langsLoc);
+              console.log(langsLoc);
             }
           );
         });
