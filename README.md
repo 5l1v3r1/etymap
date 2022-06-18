@@ -2,6 +2,13 @@
 
 Interactive etymology map.
 
+### Development
+
+```
+yarn dev
+yarn build
+```
+
 ### References
 
 - [Etymology Explorer](https://etymologyexplorer.com/): Etymology data, sourced from [Wiktionary](https://www.wiktionary.org/).
