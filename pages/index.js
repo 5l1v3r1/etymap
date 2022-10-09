@@ -25,10 +25,12 @@ export default function Home() {
 
   useEffect(() => {
     getData();
+    // eslint-disable-next-line
     console.log(mapRef);
   }, []);
   useEffect(() => {
     getData();
+    // eslint-disable-next-line
   }, [wordId]);
 
   const getData = () => {
