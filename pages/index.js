@@ -122,9 +122,13 @@ export default function Home() {
               // bearing: 13,
               // pitch: 60,
             }}
-            mapStyle="mapbox://styles/mapbox/dark-v10"
+            // mapboxAccessToken="pk.eyJ1IjoiYWdtbW5uIiwiYSI6ImNsNDA4eTVqbDA3ZWszZnIydWQwaXlwMDUifQ.klohJw1mXmjIzTAbfoejpw"
             // mapStyle="mapbox://styles/agmmnn/cl4094mje000l14n0utbraa7s"
-            mapboxAccessToken="pk.eyJ1IjoiYWdtbW5uIiwiYSI6ImNsNDA4eTVqbDA3ZWszZnIydWQwaXlwMDUifQ.klohJw1mXmjIzTAbfoejpw"
+            // mapStyle="mapbox://styles/mapbox/dark-v10"
+
+            mapboxAccessToken="pk.eyJ1Ijoibm9ub3VtYXN5IiwiYSI6ImNrMTBmY3MycTA1YTEzY3F3ZHZ3eHNsdTAifQ.7r-ppKeBALXFid9Vmpa9Pw"
+            mapStyle="mapbox://styles/nonoumasy/cl4l4kxha000c14nyouypen0w?optimize=true"
+            projection={"globe"}
             attributionControl={false}
             onDrag={(e) =>
               console.log(
