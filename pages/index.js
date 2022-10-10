@@ -48,6 +48,7 @@ export default function Home() {
         `https://api.etymologyexplorer.com/prod/random_etymology?language=English`
       )
       .then((response) => {
+        console.log(response.data.word);
         setWordId(response.data.id);
       })
       .catch((error) => console.log(error));
@@ -130,16 +131,16 @@ export default function Home() {
             mapStyle="mapbox://styles/nonoumasy/cl4l4kxha000c14nyouypen0w?optimize=true"
             projection={"globe"}
             attributionControl={false}
-            onDrag={(e) =>
-              console.log(
-                e.viewState.longitude,
-                e.viewState.latitude,
-                e.viewState.zoom,
-                e.viewState.bearing,
-                e.viewState.pitch,
-                mapRef.current.getCanvasContainer()
-              )
-            }
+            // onDrag={(e) =>
+            //   console.log(
+            //     e.viewState.longitude,
+            //     e.viewState.latitude,
+            //     e.viewState.zoom,
+            //     e.viewState.bearing,
+            //     e.viewState.pitch,
+            //     mapRef.current.getCanvasContainer()
+            //   )
+            // }
           >
             <FullscreenControl />
             <NavigationControl />
@@ -177,6 +178,12 @@ export default function Home() {
                 <Marker
                   key={item.id}
                   draggable={true}
+                  anchor="bottom"
+                  cluster={true}
+                  /* 
+                  workaround, if the item does not have a location value
+                  default location values: lat:50 lon:19
+                  */
                   longitude={
                     item.longitude ||
                     (langData2.hasOwnProperty(item.language)
@@ -189,13 +196,11 @@ export default function Home() {
                       ? langData2[item.language].latitude
                       : 50)
                   }
-                  anchor="bottom"
-                  cluster={true}
                 >
                   <div
-                    className="card"
+                    className={styles.card}
                     style={{
-                      backgroundColor: "white",
+                      backgroundColor: "azure",
                       padding: "6px 6px",
                       width: 130,
                       borderRadius: 4,
