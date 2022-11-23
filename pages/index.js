@@ -17,6 +17,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 export default function Home() {
   const [wordId, setWordId] = useState(0);
+  const [word, setWord] = useState("word");
   const [data, setData] = useState([]);
   const [langData, setLangData] = useState([]);
   const [nodes, setNodes] = useState([]);
@@ -50,6 +51,7 @@ export default function Home() {
       .then((response) => {
         console.log(response.data.word);
         setWordId(response.data.id);
+        setWord(response.data.word);
       })
       .catch((error) => console.log(error));
   };
@@ -61,6 +63,7 @@ export default function Home() {
       )
       .then((r) => {
         setWordId(r.data.auto_complete_data[0]["_id"]);
+        setWord(r.data.auto_complete_data[0]["word"]);
         console.log(
           r.data.auto_complete_data[0]["_id"],
           r.data.auto_complete_data[0]["word"]
@@ -155,7 +158,7 @@ export default function Home() {
               }}
             >
               <input
-                placeholder="word"
+                placeholder={word}
                 style={{
                   padding: "1rem",
                   paddingInlineStart: "2rem",
