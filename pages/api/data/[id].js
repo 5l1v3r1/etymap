@@ -1,5 +1,5 @@
 import axios from "axios";
-import langData from "../../langData.json";
+import langData from "../../../app/langData.json";
 
 // http://localhost:3000/api/data/0
 
