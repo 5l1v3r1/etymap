@@ -125,12 +125,8 @@ export default function Home() {
               longitude: 18.5,
               latitude: 48.5,
               zoom: 4,
-              ////
-              // longitude: 17,
-              // latitude: 49,
-              // zoom: 4.2,
-              // bearing: 13,
-              // pitch: 60,
+              bearing: 8.4,
+              pitch: 24.5,
             }}
             // mapboxAccessToken="pk.eyJ1IjoiYWdtbW5uIiwiYSI6ImNsNDA4eTVqbDA3ZWszZnIydWQwaXlwMDUifQ.klohJw1mXmjIzTAbfoejpw"
             // mapStyle="mapbox://styles/agmmnn/cl4094mje000l14n0utbraa7s"
@@ -173,6 +169,7 @@ export default function Home() {
                 }}
                 onChange={(e) => setSearchValue(e.target.value)}
                 onKeyDown={(e) => (e.key === "Enter" ? getSearch() : null)}
+                className="input"
               />
               <button type="submit" onClick={searchValue ? getSearch : null}>
                 Search
@@ -253,7 +250,7 @@ export default function Home() {
                     </div>
                     <div
                       style={{
-                        fontFamily: { montserrat },
+                        fontFamily: "Montserrat, sans-serif",
                         fontSize: 11,
                       }}
                     >
