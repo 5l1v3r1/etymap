@@ -1,5 +1,4 @@
 "use client";
-import Head from "next/head";
 import styles from "./styles.module.css";
 
 import { useRef, useEffect, useState } from "react";
@@ -12,16 +11,10 @@ import Map, {
 import { toGreeklish } from "greek-utils";
 import langData2 from "./langData.json";
 
-import { Montserrat, CormorantInfant, Roboto } from "@next/font/google";
+import { Inter, Roboto } from "@next/font/google";
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: "400",
-});
-const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({ subsets: ["latin"], weight: ["400"] });
 
 import "mapbox-gl/dist/mapbox-gl.css";
 
@@ -110,15 +103,9 @@ export default function Home() {
   }, [data]);
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>etymap</title>
-        <meta name="description" content="Etymology Map" />
-        <link rel="icon" href="/favicon.svg" />
-      </Head>
-
+    <div className="h-screen w-auto">
       <main className={roboto.className}>
-        <div className={styles.root}>
+        <div className="h-screen w-auto">
           <Map
             ref={mapRef}
             initialViewState={{
@@ -130,8 +117,6 @@ export default function Home() {
             }}
             // mapboxAccessToken="pk.eyJ1IjoiYWdtbW5uIiwiYSI6ImNsNDA4eTVqbDA3ZWszZnIydWQwaXlwMDUifQ.klohJw1mXmjIzTAbfoejpw"
             // mapStyle="mapbox://styles/agmmnn/cl4094mje000l14n0utbraa7s"
-            // mapStyle="mapbox://styles/mapbox/dark-v10"
-
             mapboxAccessToken="pk.eyJ1Ijoibm9ub3VtYXN5IiwiYSI6ImNrMTBmY3MycTA1YTEzY3F3ZHZ3eHNsdTAifQ.7r-ppKeBALXFid9Vmpa9Pw"
             mapStyle="mapbox://styles/nonoumasy/cl4l4kxha000c14nyouypen0w?optimize=true"
             projection={"globe"}
@@ -149,32 +134,27 @@ export default function Home() {
           >
             <FullscreenControl />
             <NavigationControl />
-            <div
-              style={{
-                position: "absolute",
-                width: "100%",
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-                padding: "10px",
-              }}
-            >
+            <div className="absolute w-full flex flex-row justify-center p-2">
               <input
                 placeholder={word}
-                style={{
-                  padding: "1rem",
-                  paddingInlineStart: "2rem",
-                  fontSize: "1rem",
-                  border: "1px solid #ccc",
-                }}
                 onChange={(e) => setSearchValue(e.target.value)}
                 onKeyDown={(e) => (e.key === "Enter" ? getSearch() : null)}
-                className="input"
+                className="block w-fit rounded-md m-1  p-1 border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
-              <button type="submit" onClick={searchValue ? getSearch : null}>
+
+              <button
+                type="submit"
+                onClick={searchValue ? getSearch : null}
+                className="bg-blue-500 m-1 p-1 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
                 Search
               </button>
-              <button type="submit" onClick={getrandom}>
+
+              <button
+                type="submit"
+                onClick={getrandom}
+                className="bg-blue-500 m-1  p-1 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
                 Random
               </button>
             </div>
@@ -204,7 +184,7 @@ export default function Home() {
                   }
                 >
                   <div
-                    className={styles.card}
+                    className="mx-auto "
                     style={{
                       backgroundColor: "azure",
                       padding: "6px 6px",
