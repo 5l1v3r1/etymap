@@ -1,4 +1,5 @@
-![](https://user-images.githubusercontent.com/16024979/194932300-4954d414-da76-4b6c-b495-22bdfffb103b.png)
+![](https://user-images.githubusercontent.com/16024979/208778637-2c5d7b94-54b5-4437-9e71-06e745dc51ae.png)
+
 \*work in progress
 
 ## [etymap](https://etymap.vercel.app/)
